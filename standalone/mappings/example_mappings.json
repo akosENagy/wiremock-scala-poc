@@ -1,0 +1,107 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/users"
+      },
+      "response": {
+        "status":200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": [
+          { "name": "Gipsz Jakab", "username": "j.gibbs" },
+          { "name": "Jeremiah Sutherford Saint-Jones the Last", "username": "youlostthegame" }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/users",
+        "bodyPatterns": [ {
+          "equalToJson": { "name": "John Smith", "username": "the_doctor" }
+        } ],
+        "headers": {
+          "Content-Type": { "equalTo": "application/json" }
+        }
+      },
+      "response": {
+        "status":200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {}
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/admin",
+        "headers": {
+          "ApiKey": { "equalTo": "secret" }
+        }
+      },
+      "response": {
+        "status":200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": { "message": "Successful auth" }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/admin",
+        "headers": {
+          "ApiKey": { "equalTo": "wrongApiKey" }
+        }
+      },
+      "response": {
+        "status":401,
+        "jsonBody": { }
+      }
+    },
+    {
+      "scenarioName": "My First Scenario",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "Second state",
+      "request": {
+        "method": "GET",
+        "url": "/api/scenario"
+      },
+      "response": {
+        "status":200,
+        "jsonBody": { "status": "Started" }
+      }
+    },
+    {
+      "scenarioName": "My First Scenario",
+      "requiredScenarioState": "Second state",
+      "newScenarioState": "Third state",
+      "request": {
+        "method": "GET",
+        "url": "/api/scenario"
+      },
+      "response": {
+        "status":200,
+        "jsonBody": { "status": "Second state" }
+      }
+    },
+    {
+      "scenarioName": "My First Scenario",
+      "requiredScenarioState": "Third state",
+      "newScenarioState": "Third state",
+      "request": {
+        "method": "GET",
+        "url": "/api/scenario"
+      },
+      "response": {
+        "status":200,
+        "jsonBody": { "status": "Third state" }
+      }
+    }
+  ]
+}

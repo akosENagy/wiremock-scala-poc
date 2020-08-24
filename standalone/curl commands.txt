@@ -1,0 +1,23 @@
+# Using the `example_mappings.json` as the configuration for the stubs of a locally ran Wiremock server,
+# the following cURL commands can be used to make the same HTTP requests as the ApiCallerService example client does.
+
+# Get user list API call:
+curl --location --request GET 'localhost:8080/api/users'
+
+# Post new user API call:
+curl --location --request POST 'localhost:8080/api/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "John Smith", "username": "the_doctor"
+}'
+
+# Authenticated admin API call:
+curl --location --request GET 'localhost:8080/api/admin' \
+--header 'ApiKey: secret'
+
+# Unauthorized admin API call:
+curl --location --request GET 'localhost:8080/api/admin' \
+--header 'ApiKey: wrongApiKey'
+
+# Scenario status checker API call:
+curl --location --request GET 'localhost:8080/api/scenario'
